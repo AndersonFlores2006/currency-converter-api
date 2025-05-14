@@ -13,7 +13,7 @@ currency-converter/
 ├── translator.py          # Manejador de idioma
 ├── logger.py              # Logs de auditoría
 ├── requirements.txt       # Dependencias
-├── .env                   # Claves y configuración
+├── .gitignore             # Ignora archivos sensibles y temporales
 └── README.md              # Instrucciones
 ```
 
@@ -28,7 +28,23 @@ currency-converter/
    ```bash
    pip install -r requirements.txt
    ```
-3. Configura el archivo `.env` con tus variables de entorno.
+3. Crea el archivo `.env` con tus variables de entorno (ver siguiente sección).
+
+## Configuración del archivo `.env`
+
+Crea un archivo llamado `.env` en la carpeta `currency-converter` con el siguiente contenido de ejemplo:
+
+```
+REDIS_URL=redis://localhost:6379/0
+API_KEY=tu_api_key_de_exchange
+DEFAULT_LANGUAGE=en
+```
+
+- **REDIS_URL**: URL de tu servidor Redis.
+- **API_KEY**: Tu clave de la API de tasas de cambio (por ejemplo, ExchangeRate-API, Fixer.io, etc).
+- **DEFAULT_LANGUAGE**: Idioma por defecto de las respuestas (`en` o `es`).
+
+**Nota:** El archivo `.env` está en `.gitignore` y no se sube al repositorio por seguridad.
 
 ## Ejecución
 
