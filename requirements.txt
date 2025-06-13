@@ -2,3 +2,4 @@ Flask
 python-dotenv
 redis
 flask-swagger-ui 
+requests 
