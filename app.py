@@ -5,7 +5,7 @@ Este microservicio expone una API REST para convertir montos entre diferentes mo
 
 Endpoints disponibles:
 
-- `/` — Endpoint raíz, responde con un mensaje simple para verificar que el servicio está activo.
+# - `/` — Endpoint raíz, responde con un mensaje simple para verificar que el servicio está activo.
 - `/convert` — Realiza la conversión de un monto entre dos monedas.
 - `/swagger` — Interfaz Swagger UI para probar la API.
 - `/dashboard` — Dashboard web con ejemplos y enlaces.
@@ -59,7 +59,7 @@ def swagger_json():
             "version": "1.0.0"
         },
         "basePath": "/",
-        "schemes": ["http"],
+        "schemes": ["http", "https"],
         "paths": {
             "/convert": {
                 "get": {
@@ -252,4 +252,4 @@ if __name__ == '__main__':
     print("[LOG] Entrando en __main__", file=sys.stderr)
     debug_mode = os.getenv('FLASK_DEBUG', '0') == '1'
     print(f"[LOG] debug_mode: {debug_mode}", file=sys.stderr)
-    app.run(debug=debug_mode, host='0.0.0.0', port=8080) 
+    app.run(debug=debug_mode, host='0.0.0.0', port=8080)
