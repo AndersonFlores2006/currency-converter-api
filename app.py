@@ -12,16 +12,27 @@ Endpoints disponibles:
 - `/static/swagger.json` — Especificación OpenAPI en formato JSON.
 
 """
+import sys
+print("[LOG] Iniciando app.py", file=sys.stderr)
 from flask import Flask, request, jsonify, render_template_string, redirect
+print("[LOG] Flask importado", file=sys.stderr)
 from config import Config
+print(f"[LOG] Config importado. API_KEY: {Config.API_KEY}, REDIS_URL: {Config.REDIS_URL}, DEFAULT_LANGUAGE: {Config.DEFAULT_LANGUAGE}", file=sys.stderr)
 from cache import get_cache, set_cache
+print("[LOG] Cache importado", file=sys.stderr)
 from translator import translate
+print("[LOG] Translator importado", file=sys.stderr)
 from logger import log_event
+print("[LOG] Logger importado", file=sys.stderr)
 import requests
+print("[LOG] Requests importado", file=sys.stderr)
 from flask_swagger_ui import get_swaggerui_blueprint
+print("[LOG] flask_swagger_ui importado", file=sys.stderr)
 import os
+print("[LOG] os importado", file=sys.stderr)
 
 app = Flask(__name__)
+print("[LOG] Flask app creada", file=sys.stderr)
 
 # Configuración de Swagger UI
 SWAGGER_URL = '/swagger'
@@ -55,7 +66,7 @@ def swagger_json():
                         {"name": "from", "in": "query", "description": "Código de moneda origen (ej: USD)", "required": True, "type": "string"},
                         {"name": "to", "in": "query", "description": "Código de moneda destino (ej: EUR)", "required": True, "type": "string"},
                         {"name": "amount", "in": "query", "description": "Monto a convertir", "required": True, "type": "number"},
-                        {"name": "lang", "in": "query", "description": "Idioma de la respuesta (opcional)", "required": False, "type": "string"}
+                        {"name": "lang", "in": "query", "description": "Idioma de la respuesta (opcional)", "required": False, "type": "string", "default": "en"}
                     ],
                     "responses": {
                         "200": {"description": "Conversión exitosa"},
@@ -235,5 +246,7 @@ def convert():
     })
 
 if __name__ == '__main__':
+    print("[LOG] Entrando en __main__", file=sys.stderr)
     debug_mode = os.getenv('FLASK_DEBUG', '0') == '1'
+    print(f"[LOG] debug_mode: {debug_mode}", file=sys.stderr)
     app.run(debug=debug_mode, host='0.0.0.0', port=8080) 
