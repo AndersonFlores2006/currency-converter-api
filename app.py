@@ -30,8 +30,11 @@ from flask_swagger_ui import get_swaggerui_blueprint
 print("[LOG] flask_swagger_ui importado", file=sys.stderr)
 import os
 print("[LOG] os importado", file=sys.stderr)
+from flask_cors import CORS
+print("[LOG] flask_cors importado", file=sys.stderr)
 
 app = Flask(__name__)
+CORS(app)
 print("[LOG] Flask app creada", file=sys.stderr)
 
 # Configuración de Swagger UI
