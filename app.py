@@ -51,6 +51,11 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route('/static/swagger.json')
 def swagger_json():
+    # Detectar el host y el esquema dinámicamente
+    host = request.host
+    # Google Cloud Run y otros proxies usan X-Forwarded-Proto para indicar el protocolo original
+    scheme = request.headers.get('X-Forwarded-Proto', 'http')
+
     swagger_doc = {
         "swagger": "2.0",
         "info": {
@@ -58,8 +63,9 @@ def swagger_json():
             "description": "API para convertir montos entre monedas.",
             "version": "1.0.0"
         },
+        "host": host,  # Añadir el host dinámicamente
         "basePath": "/",
-        "schemes": ["http", "https"],
+        "schemes": [scheme],  # Usar solo el esquema detectado
         "paths": {
             "/convert": {
                 "get": {
